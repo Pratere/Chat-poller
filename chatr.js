@@ -10,12 +10,12 @@ let opts = {
     password: 'oauth:' + 'kksie40vo0h1fa5w1qmjhb9bl94n7s'
   },
   channels: [
-    'blastproseries'
+    'federaltax'
   ],
 }
 
 // These are the commands the bot knows (defined below):
-let knownCommands = { echo}
+let knownCommands = { echo, poll }
 
 // Function called when the "echo" command is issued:
 function echo (target, context, params) {
@@ -27,6 +27,18 @@ function echo (target, context, params) {
     sendMessage(target, context, msg)
   } else { // Nothing to echo
     console.log(`* Nothing to echo`)
+  }
+}
+
+function poll (target, context, params) {
+  // If there's something to poll:
+  if (params.length) {
+    // Join the params into a string:
+    const msg = params.join(' ')
+    // Send it back to the correct place:
+    logger2.write(`${params}\n`)
+  } else { // Nothing to poll
+    console.log(`* Nothing to poll`)
   }
 }
 
@@ -51,6 +63,9 @@ client.on('disconnected', onDisconnectedHandler)
 client.connect()
 
 var logger = fs.createWriteStream('log.txt', {
+  flags: 'a' // 'a' means appending (old data will be preserved)
+})
+var logger2 = fs.createWriteStream('log2.txt', {
   flags: 'a' // 'a' means appending (old data will be preserved)
 })
 
