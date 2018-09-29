@@ -1,5 +1,4 @@
 const tmi = require('tmi.js')
-const haikudos = require('haikudos')
 //BEFORE RUNNING, RUN THIS: npm i tmi.js haikudos
 // Valid commands start with:
 let commandPrefix = '!'

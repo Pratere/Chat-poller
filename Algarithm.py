@@ -2,6 +2,7 @@ from difflib import SequenceMatcher
 test1 = ["String", "String", "Strong", "Strang", "String", "Wrong", "Wrang", "Wong", "Dong", "String", "String", "Strong", "Strang", "String", "Wrong", "Wrang", "Wong", "Dong", "Clong"]
 test2 = [" String", "string", "Strwing", "Strong ", "Sta ir", "Stare", "s Tor"]
 test3 = ["String", "String", "Strong", "Strang", "String", "Wrong", "Wrang", "Wong", "Dong", "String", "String", "Strong", "Strang", "String", "Wrong", "Wrang", "Wong", "Dong", "Clong", " String", "string", "Strwing", "Strong ", "Sta ir", "Stare", "s Tor"]
+test4 = ["#T*)", "F793>", "f793"]
 
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
@@ -11,7 +12,8 @@ def getSimilars(list1):
     for string in list1:
         found = False # An initial false found value to see if the string is found in a dictionary
         # print(string)
-        stringl = string.lower().replace(" ", "") # Make the string lowercase and remove all spaces
+        stringl = string.lower() # Make the string lowercase and remove all spaces
+        stringl = ''.join(i for i in stringl if i.isalnum())
         if len(startDict) == 0:
             startDict.append({stringl:1}) # If there are no dictionaries in the list then we need to make the first one
             # print(stringl, "Added to new Dict")
@@ -58,6 +60,7 @@ def main():
     print(getTopWords(getSimilars(test1)))
     print(getTopWords(getSimilars(test2)))
     print(getTopWords(getSimilars(test3)))
+    print(getTopWords(getSimilars(test4)))
 
 if __name__ == '__main__':
     main()
