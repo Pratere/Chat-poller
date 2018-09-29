@@ -1,5 +1,6 @@
 const tmi = require('tmi.js')
-//BEFORE RUNNING, RUN THIS: npm i tmi.js haikudos
+var fs = require('fs')
+//BEFORE RUNNING, RUN THIS: npm i tmi.js
 // Valid commands start with:
 let commandPrefix = '!'
 // Define configuration options:
@@ -49,7 +50,6 @@ client.on('disconnected', onDisconnectedHandler)
 // Connect to Twitch:
 client.connect()
 
-var fs = require('fs')
 var logger = fs.createWriteStream('log.txt', {
   flags: 'a' // 'a' means appending (old data will be preserved)
 })

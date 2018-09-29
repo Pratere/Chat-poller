@@ -2,6 +2,7 @@ from difflib import SequenceMatcher as sim
 
 test1 = ["String", "String", "Strong", "Strang", "String", "Boolty", "bitty", "boolY"]
 test2 = ["Str!ng", "St^)ing", "StrOng", "Str0ng", "Str+ng", "Boolty", "bitty", "boolY"]
+test3 = ["Str!ng", "St^)ing", "StrOng", "Str0ng", "Str+ng", "Boolty", "bitty", "boolY", "String", "String", "Strong", "Strang", "String", "Boolty", "bitty", "boolY"]
 
 def similarity(a, b):
     return sim(None, a, b).ratio()
@@ -59,5 +60,7 @@ def getTopWords(list):
 def main():
     print(getTopWords(getSimilars(test1)))
     print(getTopWords(getSimilars(test2)))
+    print(getTopWords(getSimilars(test3)))
 
-main()
+if __name__ == '__main__':
+    main()
