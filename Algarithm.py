@@ -1,41 +1,51 @@
-test1 = ["String", "String", "Strong", "Strang", "String"]
+from difflib import SequenceMatcher
+test1 = ["String", "String", "Strong", "Strang", "String", "Wrong", "Wrang", "Wong", "Dong", "String", "String", "Strong", "Strang", "String", "Wrong", "Wrang", "Wong", "Dong", "Clong"]
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
 
 def getSimilars(list1):
-    startDict = {}
-    print(startDict)
+    startDict = []
     for string in list1:
+        found = False
+        print(string)
         stringl = string.lower()
         req = len(string) - (len(string)//5)
         if len(startDict) == 0:
-            stringlDict = stringl + "Dict"
-            startDict[stringlDict] = {stringl:1}
-        for dict in startDict:
-            print(dict)
-            if stringl in dict:
-                dict[stringl] += 1
-            else:
-                found = False
-                for key in dict:
-                    count = 0
-                    if len(stringl) <= key:
-                        length = len(stringl)
-                        found = True
-                    else:
-                        length = len(key)
-                    for i in range(length):
-                        if stringl[i] == key[i]:
-                            count+=1
-                    if count >= req:
-                        dict[stringl] = 1
-                        found = True
-                if not found:
-                    stringlDict = stringl + "Dict"
-                    startDict[stringlDict] = {}
+            startDict.append({stringl:1})
+            print(stringl, "Added to new Dict")
+            found = True
+        else:
+            for dict in startDict:
+                if stringl in dict:
+                    dict[stringl] += 1
+                    print(stringl, "Found in Dict:", dict)
+                    found = True
+                    break
+                else:
+                    for key in dict:
+                        # count = 0
+                        # if len(stringl) <= len(key):
+                        #     length = len(stringl)
+                        # else:
+                        #     length = len(key)
+                        # for i in range(length):
+                        #     if stringl[i] == key[i]:
+                        #         count+=1
+                        # if count >= req:
+                        if similar(stringl, key) >= 0.75:
+                            dict[stringl] = 1
+                            found = True
+                            print(stringl, "Found to be similar in Dict")
+                            break
+            if not found:
+                startDict.append({stringl:1})
+                print(stringl, "Added to new Dict")
+
+
+    print(startDict)
 
 def main():
     getSimilars(test1)
-    # dict = {"Hello": 1}
-    # dict["Hello"] += 1
-    # print(dict)
+    print(similar("wong", "dong"))
 
 main()
