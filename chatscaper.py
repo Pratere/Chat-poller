@@ -17,7 +17,7 @@ for i in range(5):
     page_soup = soup(html, "html.parser")
 
     f = open("Currenthtml{0}.txt".format(i), "w")
-    f.write(doc)
+    f.write(html)
 
 containers_div = page_soup.findAll("span",{"class":"text-fragment"})
 
