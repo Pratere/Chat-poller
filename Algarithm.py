@@ -1,9 +1,10 @@
-from difflib import SequenceMatcher
+from difflib import SequenceMatcher as sim
 
-test1 = ["String", "String", "Strong", "Strang", "String", "Booty"]
+test1 = ["String", "String", "Strong", "Strang", "String", "Boolty", "bitty", "boolY"]
+test2 = ["Str!ng", "St^)ing", "StrOng", "Str0ng", "Str+ng", "Boolty", "bitty", "boolY"]
 
-def similar(a, b):
-    return SequenceMatcher(None, a, b).ratio()
+def similarity(a, b):
+    return sim(None, a, b).ratio()
 
 def getSimilars(list1):
     startDict = []
@@ -25,7 +26,7 @@ def getSimilars(list1):
                     break
                 else:
                     for key in dict:
-                        if similar(stringl, key) >= 0.75:
+                        if similarity(stringl, key) >= 0.75:
                             print(stringl, "similar word found in", dict)
                             dict[stringl] = 1
                             found = True
@@ -35,6 +36,7 @@ def getSimilars(list1):
         if not found:
             startDict.append({stringl:1})
             print(stringl, "put in new dict")
+    print(startDict)
     return startDict
 
 def getTopWords(list):
@@ -47,9 +49,15 @@ def getTopWords(list):
                 top = dict[key]
                 topKey = key
             total += dict[key]
+        if total in topWords:
+            topWords[total] += " + " + topKey
+        else:
+            topWords[total] = topKey
+    return topWords
 
 
 def main():
-    getSimilars(test1)
+    print(getTopWords(getSimilars(test1)))
+    print(getTopWords(getSimilars(test2)))
 
 main()
