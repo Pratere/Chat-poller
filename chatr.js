@@ -1,7 +1,7 @@
 const tmi = require('tmi.js')
 var fs = require('fs')
-// var $ = require('jQuery');
-var cmd = require('node-cmd');
+var $ = require('jQuery');
+// var cmd = require('node-cmd');
 //BEFORE RUNNING, RUN THIS: npm i tmi.js
 // Valid commands start with:
 let commandPrefix = '!'
@@ -44,17 +44,18 @@ function poll (target, context, params) {
   }
 }
 
+
 function python (target, context, params) {
   // var your_param = 'abc';
-  var pyProcess = cmd.get('python Print.py',
-              function(data, err, stderr) {
-                if (!err) {
-                  console.log("data from python script " + data)
-                } else {
-                  console.log("python script cmd error: " + err)
-                  }
-                }
-              );
+  // var pyProcess = cmd.get('python Print.py',
+  //             function(data, err, stderr) {
+  //               if (!err) {
+  //                 console.log("data from python script " + data)
+  //               } else {
+  //                 console.log("python script cmd error: " + err)
+  //                 }
+  //               }
+  //             );
 }
 
 // Helper function to send the correct type of message:
@@ -92,7 +93,7 @@ function onMessageHandler (target, context, msg, self) {
 
   // This isn't a command since it has no prefix:
   if (msg.substr(0, 1) !== commandPrefix) {
-    console.log(`[${target} (${context['message-type']})] ${context.username}: ${msg}`)
+    // console.log(`[${target} (${context['message-type']})] ${context.username}: ${msg}`)
     logger.write(`[${target} (${context['message-type']})] ${context.username}: ${msg}"\n"`)
 
     return

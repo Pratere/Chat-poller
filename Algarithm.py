@@ -9,26 +9,26 @@ def similarity(a, b):
 
 def getSimilars(list1):
     startDict = []
-    print(startDict)
+    # print(startDict)
     for string in list1:
         found = False
         stringl = string.lower()
         stringl = ''.join(i for i in stringl if i.isalnum())
         if len(startDict) == 0:
             startDict.append({stringl:1})
-            print(stringl, "put in new dict", startDict[0])
+            # print(stringl, "put in new dict", startDict[0])
             found = True
         else:
             for dict in startDict:
                 if stringl in dict:
-                    print(stringl, "found in", dict)
+                    # print(stringl, "found in", dict)
                     dict[stringl] += 1
                     found = True
                     break
                 else:
                     for key in dict:
                         if similarity(stringl, key) >= 0.75:
-                            print(stringl, "similar word found in", dict)
+                            # print(stringl, "similar word found in", dict)
                             dict[stringl] = 1
                             found = True
                             break
@@ -36,7 +36,7 @@ def getSimilars(list1):
                         break
         if not found:
             startDict.append({stringl:1})
-            print(stringl, "put in new dict")
+            # print(stringl, "put in new dict")
     print(startDict)
     return startDict
 
