@@ -49,6 +49,13 @@ client.on('disconnected', onDisconnectedHandler)
 // Connect to Twitch:
 client.connect()
 
+var fs = require('fs')
+var logger = fs.createWriteStream('log.txt', {
+  flags: 'a' // 'a' means appending (old data will be preserved)
+})
+
+//logger.write('some data') // append string to your file
+
 // Called every time a message comes in:
 function onMessageHandler (target, context, msg, self) {
   if (self) { return } // Ignore messages from the bot
@@ -56,7 +63,10 @@ function onMessageHandler (target, context, msg, self) {
   // This isn't a command since it has no prefix:
   if (msg.substr(0, 1) !== commandPrefix) {
     console.log(`[${target} (${context['message-type']})] ${context.username}: ${msg}`)
+    logger.write(`[${target} (${context['message-type']})] ${context.username}: ${msg}"\n"`)
+
     return
+
   }
 
   // Split the message into individual words:
