@@ -1,5 +1,6 @@
 const tmi = require('tmi.js')
 var fs = require('fs')
+var $ = require('jQuery');
 //BEFORE RUNNING, RUN THIS: npm i tmi.js
 // Valid commands start with:
 let commandPrefix = '!'
@@ -15,7 +16,7 @@ let opts = {
 }
 
 // These are the commands the bot knows (defined below):
-let knownCommands = { echo, poll }
+let knownCommands = { echo, poll, python }
 
 // Function called when the "echo" command is issued:
 function echo (target, context, params) {
@@ -40,6 +41,20 @@ function poll (target, context, params) {
   } else { // Nothing to poll
     console.log(`* Nothing to poll`)
   }
+}
+
+function python (target, context, params) {
+  // var your_param = 'abc';
+  $.ajax({
+     url: 'Print.py',
+     type: 'GET',
+     success: function (response) {
+         console.log(response);
+     },
+     error: function (error) {
+         console.log(error);
+     }
+  });
 }
 
 // Helper function to send the correct type of message:
