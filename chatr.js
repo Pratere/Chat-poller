@@ -97,6 +97,7 @@ function onMessageHandler (target, context, msg, self) {
   if (msg.substr(0, 1) !== commandPrefix) {
     // console.log(`[${target} (${context['message-type']})] ${context.username}: ${msg}`)
     logger.write(`[${target} (${context['message-type']})] ${context.username}: ${msg}"\n"`)
+    console.log(`[${target} (${context['message-type']})] ${context.username}: ${msg}\n`)
 
     return
 
