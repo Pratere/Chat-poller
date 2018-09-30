@@ -1,4 +1,5 @@
 from difflib import SequenceMatcher as sim
+import os
 
 test1 = ["String", "String", "Strong", "Strang", "String", "Boolty", "bitty", "boolY"]
 test2 = ["Str!ng", "St^)ing", "StrOng", "Str0ng", "Str+ng", "Boolty", "bitty", "boolY"]
@@ -37,7 +38,7 @@ def getSimilars(list1):
         if not found:
             startDict.append({stringl:1})
             # print(stringl, "put in new dict")
-    print(startDict)
+    # print(startDict)
     return startDict
 
 def getTopWords(list):
@@ -58,20 +59,32 @@ def getTopWords(list):
 
 
 def main():
-    with open("/Users/eliprater/github/Chat-poller/log2.txt") as f:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    with open('{0}/log2.txt'.format(dir_path), 'r') as fin:
+        data = fin.read().splitlines(True)
+    if len(data) > 300:
+        with open('{0}/log2.txt'.format(dir_path), 'w') as fout:
+            fout.writelines(data[300:])
+    with open('{0}/log2.txt'.format(dir_path)) as f:
         content = f.readlines()
     content = [x.strip() for x in content]
     f.close()
+    print(content)
 
-    top_words = getTopWords(getSimilars(content)))
+    top_words = getTopWords(getSimilars(content))
 
     # print(getTopWords(getSimilars(test1)))
     # print(getTopWords(getSimilars(test2)))
     # print(getTopWords(getSimilars(test3)))
 
-    w = open("topWords.txt", "w")
-    for key, value in top_words:
-        w.write()
+    w = open('{0}/topWords.txt'.format(dir_path), "w")
+    w.write("")
+    w.close()
+    w = open('{0}/topWords.txt'.format(dir_path), "a")
+    for key, value in top_words.items():
+        keyVal = "{0} {1}\n".format(key, value)
+        print(keyVal)
+        w.write(keyVal)
     w.close()
 
 if __name__ == '__main__':

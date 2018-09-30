@@ -47,16 +47,16 @@ function poll (target, context, params) {
 
 function python (target, context, params) {
   // var your_param = 'abc';
-  var pyProcess = cmd.get('python Print.py',
+  var pyProcess = cmd.get('python Algarithm.py',
               function(data, err, stderr) {
                 if (!err) {
-                  console.log("data from python script " + data)
+                  // console.log("data from python script " + data)
                 } else {
-                  console.log("python script cmd error: " + err)
+                  // console.log("python script cmd error: " + err)
                   }
                 }
               );
-  read = fs.readFile('demofile.txt', function(err, data) {
+  read = fs.readFile('topWords.txt', function(err, data) {
     console.log(`${data}`)
   })
 }
