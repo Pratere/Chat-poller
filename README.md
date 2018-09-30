@@ -2,7 +2,7 @@
 
 ### Motivation
 
-As passionate followers of some of the top MLG pros in the industry, we came to a mutual understanding that the incoherent floods of scrambled replies to a Streamer's solicitation of information to their viewers.
+As passionate followers of some of the top MLG pros in the industry, we came to a mutual understanding that the incoherent floods of scrambled replies to a Streamer's solicitation of information to their viewers can be overwhelming, and there needs to be a solution.
 
 
 
