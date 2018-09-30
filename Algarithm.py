@@ -52,9 +52,9 @@ def getTopWords(list):
                 topKey = key
             total += dict[key]
         if total in topWords:
-            topWords[total] += " + " + topKey
+            topWords[total] += " + " + topKey.upper()
         else:
-            topWords[total] = topKey
+            topWords[total] = topKey.upper()
     return topWords
 
 
@@ -69,7 +69,6 @@ def main():
         content = f.readlines()
     content = [x.strip() for x in content]
     f.close()
-    print(content)
 
     top_words = getTopWords(getSimilars(content))
 
@@ -81,10 +80,17 @@ def main():
     w.write("")
     w.close()
     w = open('{0}/topWords.txt'.format(dir_path), "a")
-    for key, value in top_words.items():
-        keyVal = "{0} {1}\n".format(key, value)
-        print(keyVal)
+    total = 0
+    while (len(top_words) > 0):
+        topKey = 0
+        for key in top_words:
+            total += key
+            if key > topKey:
+                topKey = key
+        perc = (topKey*100) // total
+        keyVal = "#"*perc + " {0} {1}\n".format(topKey, top_words[topKey])
         w.write(keyVal)
+        del top_words[topKey]
     w.close()
 
 if __name__ == '__main__':
