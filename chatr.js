@@ -2,22 +2,24 @@ const tmi = require('tmi.js')
 var fs = require('fs')
 // var $ = require('jQuery');
 var cmd = require('node-cmd');
+const readline = require('readline');
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+
 //BEFORE RUNNING, RUN THIS: npm i tmi.js
 // Valid commands start with:
 let commandPrefix = '!'
 // Define configuration options:
-let opts = {
-  identity: {
-    username: 'federaltaxbot',
-    password: 'oauth:' + 'kksie40vo0h1fa5w1qmjhb9bl94n7s'
-  },
-  channels: [
-    'federaltax'
-  ],
-}
+
 
 // These are the commands the bot knows (defined below):
-let knownCommands = { echo, poll, python }
+let knownCommands = { echo, poll }
 
 // Function called when the "echo" command is issued:
 function echo (target, context, params) {
@@ -45,17 +47,9 @@ function poll (target, context, params) {
 }
 
 
-function python (target, context, params) {
+function python () {
   // var your_param = 'abc';
-  var pyProcess = cmd.get('python Algarithm.py',
-              function(data, err, stderr) {
-                if (!err) {
-                  // console.log("data from python script " + data)
-                } else {
-                  // console.log("python script cmd error: " + err)
-                  }
-                }
-              );
+  var pyProcess = cmd.get('python Algarithm.py');
   read = fs.readFile('topWords.txt', function(err, data) {
     console.log(`${data}`)
   })
@@ -71,15 +65,38 @@ function sendMessage (target, context, message) {
 }
 
 // Create a client with our options:
-let client = new tmi.client(opts)
 
-// Register our event handlers (defined below):
-client.on('message', onMessageHandler)
-client.on('connected', onConnectedHandler)
-client.on('disconnected', onDisconnectedHandler)
+
+
+rl.on('line', entryHandler)
 
 // Connect to Twitch:
-client.connect()
+function entryHandler (input) {
+  if (input === 'poll') {
+    python()
+  }
+  else if (input === 'f') {
+
+  }
+  else {
+    let opts = {
+      identity: {
+        username: 'federaltaxbot',
+        password: 'oauth:' + 'kksie40vo0h1fa5w1qmjhb9bl94n7s'
+      },
+      channels: [
+        input
+      ],
+    }
+    let client = new tmi.client(opts)
+    client.connect()
+
+    // Register our event handlers (defined below):
+    client.on('message', onMessageHandler)
+    client.on('connected', onConnectedHandler)
+    client.on('disconnected', onDisconnectedHandler)
+  }
+}
 
 var logger = fs.createWriteStream('log.txt', {
   flags: 'a' // 'a' means appending (old data will be preserved)
