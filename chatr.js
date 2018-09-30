@@ -19,7 +19,7 @@ let commandPrefix = '!'
 
 
 // These are the commands the bot knows (defined below):
-let knownCommands = { poll }
+let knownCommands = { poll, clear }
 
 
 function poll (target, context, params) {
@@ -32,6 +32,13 @@ function poll (target, context, params) {
   } else { // Nothing to poll
     console.log(`* Nothing to poll`)
   }
+}
+
+function clear () {
+  var logger2 = fs.createWriteStream('currentPoll.txt', {
+    flags: 'w' // 'a' means appending (old data will be preserved)
+  })
+  logger2.write('')
 }
 
 
@@ -55,6 +62,9 @@ rl.on('line', entryHandler)
 function entryHandler (input) {
   if (input === 'poll' || input === 'pill') {
     python()
+  }
+  else if (input === 'clear') {
+    clear()
   }
   else if (input != '') {
     let opts = {
