@@ -63,9 +63,9 @@ def main():
     with open('{0}/log2.txt'.format(dir_path), 'r') as fin:
         data = fin.read().splitlines(True)
     if len(data) > 300:
-        with open('{0}/log2.txt'.format(dir_path), 'w') as fout:
+        with open('{0}/currentPoll.txt'.format(dir_path), 'w') as fout:
             fout.writelines(data[len(data)-300:])
-    with open('{0}/log2.txt'.format(dir_path)) as f:
+    with open('{0}/currentPoll.txt'.format(dir_path)) as f:
         content = f.readlines()
     content = [x.strip() for x in content]
     f.close()

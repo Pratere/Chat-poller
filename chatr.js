@@ -82,7 +82,7 @@ function entryHandler (input) {
 var logger = fs.createWriteStream('log.txt', {
   flags: 'a' // 'a' means appending (old data will be preserved)
 })
-var logger2 = fs.createWriteStream('log2.txt', {
+var logger2 = fs.createWriteStream('currentPoll.txt', {
   flags: 'a' // 'a' means appending (old data will be preserved)
 })
 
