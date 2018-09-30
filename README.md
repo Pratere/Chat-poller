@@ -19,7 +19,7 @@ In popular chat rooms, such as busy Twitch's Fortnite Streams, a streamer may wa
 
 ### Implementation
 
-Dynopoll.io is hosted at [Dynopoll.io ](Dynopoll.io ). Here, users will login select their platform, and create a simple poll for their users. Dynopoll.io then counts the polls and calculates the winner and returns statistics as well as other data analytics to the user, all of which is invisible to the viewers making Dynopoll.io as discrete and least intrusive as possible. Dynopoll.io is still in its early stages and has room for improvement. As of 30 September 2018, Dynopoll.io has only been implemented and tested, with great results on Twitch.tv. With funding and more development, we plan to expand to other popular platforms such as YouTube, Reddit, Twitter, Facebook, Instagram, and Snapchat.
+Dynopoll.io is soon to be hosted at [Dynopoll.io ](Dynopoll.io ). Here, users will login select their platform, and create a simple poll for their users. Dynopoll.io then counts the polls and calculates the winner and returns statistics as well as other data analytics to the user, all of which is invisible to the viewers making Dynopoll.io as discrete and least intrusive as possible. Dynopoll.io is still in its early stages and has room for improvement. As of 30 September 2018, Dynopoll.io has only been implemented and tested, with great results on Twitch.tv. With funding and more development, we plan to expand to other popular platforms such as YouTube, Reddit, Twitter, Facebook, Instagram, and Snapchat.
 
 ### Target Audience
 

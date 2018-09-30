@@ -52,9 +52,9 @@ def getTopWords(list):
                 topKey = key
             total += dict[key]
         if total in topWords:
-            topWords[total] += " + " + topKey.upper()
+            topWords[total] += "/" + topKey
         else:
-            topWords[total] = topKey.upper()
+            topWords[total] = topKey
     return topWords
 
 
@@ -64,11 +64,12 @@ def main():
         data = fin.read().splitlines(True)
     if len(data) > 300:
         with open('{0}/log2.txt'.format(dir_path), 'w') as fout:
-            fout.writelines(data[300:])
+            fout.writelines(data[len(data)-300:])
     with open('{0}/log2.txt'.format(dir_path)) as f:
         content = f.readlines()
     content = [x.strip() for x in content]
     f.close()
+    print(content)
 
     top_words = getTopWords(getSimilars(content))
 

@@ -53,13 +53,10 @@ rl.on('line', entryHandler)
 
 // Connect to Twitch:
 function entryHandler (input) {
-  if (input === 'poll') {
+  if (input === 'poll' || input === 'pill') {
     python()
   }
-  else if (input === ' ') {
-
-  }
-  else {
+  else if (input != '') {
     let opts = {
       identity: {
         username: 'federaltaxbot',
@@ -76,6 +73,9 @@ function entryHandler (input) {
     client.on('message', onMessageHandler)
     client.on('connected', onConnectedHandler)
     client.on('disconnected', onDisconnectedHandler)
+  }
+  else {
+
   }
 }
 
