@@ -19,20 +19,8 @@ let commandPrefix = '!'
 
 
 // These are the commands the bot knows (defined below):
-let knownCommands = { echo, poll }
+let knownCommands = { poll }
 
-// Function called when the "echo" command is issued:
-function echo (target, context, params) {
-  // If there's something to echo:
-  if (params.length) {
-    // Join the params into a string:
-    const msg = params.join(' ')
-    // Send it back to the correct place:
-    sendMessage(target, context, msg)
-  } else { // Nothing to echo
-    console.log(`* Nothing to echo`)
-  }
-}
 
 function poll (target, context, params) {
   // If there's something to poll:
@@ -49,22 +37,15 @@ function poll (target, context, params) {
 
 function python () {
   // var your_param = 'abc';
-  var pyProcess = cmd.get('python Algarithm.py');
-  read = fs.readFile('topWords.txt', function(err, data) {
-    console.log(`${data}`)
-  })
-}
+  var pyProcess = cmd.run('python Algarithm.py');
+  setTimeout(function (){
 
-// Helper function to send the correct type of message:
-function sendMessage (target, context, message) {
-  if (context['message-type'] === 'whisper') {
-    client.whisper(target, message)
-  } else {
-    client.say(target, message)
-  }
-}
+    fs.readFile('topWords.txt', function(err, data) {
+      console.log(`${data}`)
+    })
 
-// Create a client with our options:
+}, 500);
+}
 
 
 
@@ -75,7 +56,7 @@ function entryHandler (input) {
   if (input === 'poll') {
     python()
   }
-  else if (input === 'f') {
+  else if (input === ' ') {
 
   }
   else {
