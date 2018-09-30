@@ -82,10 +82,11 @@ def main():
     w.close()
     w = open('{0}/topWords.txt'.format(dir_path), "a")
     total = 0
+    for key in top_words:
+        total += key
     while (len(top_words) > 0):
         topKey = 0
         for key in top_words:
-            total += key
             if key > topKey:
                 topKey = key
         perc = (topKey*100) // total
