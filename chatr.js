@@ -1,7 +1,7 @@
 const tmi = require('tmi.js')
 var fs = require('fs')
-var $ = require('jQuery');
-// var cmd = require('node-cmd');
+// var $ = require('jQuery');
+var cmd = require('node-cmd');
 //BEFORE RUNNING, RUN THIS: npm i tmi.js
 // Valid commands start with:
 let commandPrefix = '!'
@@ -47,15 +47,18 @@ function poll (target, context, params) {
 
 function python (target, context, params) {
   // var your_param = 'abc';
-  // var pyProcess = cmd.get('python Print.py',
-  //             function(data, err, stderr) {
-  //               if (!err) {
-  //                 console.log("data from python script " + data)
-  //               } else {
-  //                 console.log("python script cmd error: " + err)
-  //                 }
-  //               }
-  //             );
+  var pyProcess = cmd.get('python Print.py',
+              function(data, err, stderr) {
+                if (!err) {
+                  console.log("data from python script " + data)
+                } else {
+                  console.log("python script cmd error: " + err)
+                  }
+                }
+              );
+  read = fs.readFile('demofile.txt', function(err, data) {
+    console.log(`${data}`)
+  })
 }
 
 // Helper function to send the correct type of message:
@@ -84,6 +87,7 @@ var logger = fs.createWriteStream('log.txt', {
 var logger2 = fs.createWriteStream('log2.txt', {
   flags: 'a' // 'a' means appending (old data will be preserved)
 })
+
 
 //logger.write('some data') // append string to your file
 

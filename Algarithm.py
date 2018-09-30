@@ -58,9 +58,21 @@ def getTopWords(list):
 
 
 def main():
-    print(getTopWords(getSimilars(test1)))
-    print(getTopWords(getSimilars(test2)))
-    print(getTopWords(getSimilars(test3)))
+    with open("/Users/eliprater/github/Chat-poller/log2.txt") as f:
+        content = f.readlines()
+    content = [x.strip() for x in content]
+    f.close()
+
+    top_words = getTopWords(getSimilars(content)))
+
+    # print(getTopWords(getSimilars(test1)))
+    # print(getTopWords(getSimilars(test2)))
+    # print(getTopWords(getSimilars(test3)))
+
+    w = open("topWords.txt", "w")
+    for key, value in top_words:
+        w.write()
+    w.close()
 
 if __name__ == '__main__':
     main()
